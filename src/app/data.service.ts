@@ -7,11 +7,13 @@ import { Observable } from 'rxjs';
 })
 export class DataService {
 
+  apiURL: string = 'https://jsonplaceholder.typicode.com/todos'
+
   constructor(private http: HttpClient) { 
   }
 
-  getDetails(): Observable<any>{
-    return this.http.get('https://jsonplaceholder.typicode.com/todos')
+  fetchData(): Promise<any>{
+    return this.http.get<any>(this.apiURL).toPromise();
   }
 
 }
