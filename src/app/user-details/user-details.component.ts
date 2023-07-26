@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DataService } from '../data.service';
@@ -16,21 +17,18 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   isExpand: boolean[] = [false];
   loading: boolean = false;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService,private http: HttpClient ) { }
 
   ngOnInit(): void {
     this.getUserDetails();
   }
 
-  getUserDetails(): void{
+  async getUserDetails(): Promise<void>{
     this.loading = true;
-    this.sub = this.dataService.getDetails().subscribe((res: any) => {
-      if(res){
-        console.log('Response', res)
-        this.userDatails = res;
-        this.loading = false;
-      }
-    })
+    let data = await this.dataService.fetchData();
+    this.userDatails = data;
+    this.loading = false;
+    console.log('Data', data)
   }
 
   showDetails(index: number): void{
@@ -47,8 +45,4 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
       this.sub.unsubscribe();
     }
   }
-
- 
-
-
 }
