@@ -14,8 +14,9 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   userDatails: any = [];
   @Input() tableHeightValue: any;
   tableHeight: string;
-  isExpand: boolean[] = [false];
   loading: boolean = false;
+  currentIndex: number = 0;
+  isExpand: boolean[] = [false];
 
   constructor(private dataService: DataService,private http: HttpClient ) { }
 
@@ -32,12 +33,12 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   }
 
   showDetails(index: number): void{
+    this.currentIndex = index;
     this.isExpand[index] = true;
   }
 
   closeDetails(index: number): void{
     this.isExpand[index] = false;
-
   }
 
   ngOnDestroy(): void{
@@ -45,4 +46,8 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
       this.sub.unsubscribe();
     }
   }
+
+ 
+
+
 }
