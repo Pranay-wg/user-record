@@ -1,0 +1,39 @@
+<section class="user-details-table align-center">
+    <div class="table-div" [ngStyle]="{'height': tableHeightValue, 'overflow-y': 'auto'}">
+    <div *ngIf="loading" class="loader"></div>
+
+        <table *ngIf="!loading">
+            <tr class="thead-row">
+                <td>Sr No.</td>
+                <th class="exploder">User Id</th>
+                <th>Title</th>
+            </tr>
+            <ng-container *ngFor="let item of userDatails; let i = index">
+                <tr>
+                    <td>{{i+1}}</td>
+                    <td>{{item.id}}</td>
+                    <td (click)="showDetails(i)" class="title-value">{{item.title}}</td>
+                </tr>
+                <tr *ngIf="isExpand[i]">
+                    <td colspan="3">
+                      <div class="card-element">
+                        <div style="width: 33%;">
+                            <span>Title: </span> <span>{{item.title}}</span> 
+                        </div>
+                        <div style="width: 20%;border-left: 1px solid #000;border-right: 1px solid #000;">
+                            <span>ID: </span> <span>{{item.id}}</span> 
+                        </div>
+                        <div style="width: 33%;">
+                            <span>Status: </span> <span>{{item.completed ? 'Completed': 'Not Completed'}}</span>
+                        </div>
+                        <div style="width: 10%;">
+                            <span class="close-card" (click)="closeDetails(i)">&#x2715;</span>
+                        </div>
+
+                      </div>
+                    </td>
+                  </tr>
+            </ng-container>
+        </table>
+    </div>
+</section>

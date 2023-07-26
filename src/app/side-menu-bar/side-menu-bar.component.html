@@ -1,0 +1,18 @@
+<div id="sidenav-content" class="sidenav">
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+  </div>
+  
+  <div id="page-content">
+    <div>
+      <app-top-nav (statusValue)="statusValue($event)" [navBarStatus]="isOpen"></app-top-nav>
+    </div>
+    <div>
+      <app-user-details [tableHeightValue]="tableHeight"></app-user-details>
+    </div>
+    <div>
+      <app-footer></app-footer>
+    </div>
+  </div>
